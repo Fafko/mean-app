@@ -11,7 +11,8 @@ module.exports = (gulp, plugins, config) => () => {
     
     stream.queue(gulp.src([
         './public/src/lib/angular/angular.js',
-        './public/src/lib/angular-route/angular-route.min.js',
+        './public/src/lib/angular-route/angular-route.js',
+        './public/src/lib/angular-resource/angular-resource.js',
         './public/src/lib/ngMask/dist/ngMask.js'
     ]));
 
