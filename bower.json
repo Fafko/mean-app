@@ -10,6 +10,8 @@
     "angular-route": "~1.5.3",
     "ngMask": "angular-mask#~3.0.16",
     "bootstrap": "~3.3.6",
-    "normalize-css": "normalize.css#~4.0.0"
+    "normalize-css": "normalize.css#~4.0.0",
+    "angular-resource": "~1.5.3",
+    "bootswatch-dist": "yeti"
   }
 }
