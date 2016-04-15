@@ -3,6 +3,7 @@
 
 var app = angular.module('meanApp', [
     'ngRoute',
+    'ngResource',
     'Templates',
     'ngMask',
     'Services',
