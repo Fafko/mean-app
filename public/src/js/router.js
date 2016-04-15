@@ -1,37 +1,45 @@
-var router = function($routeProvider) {
+var router = function($routeProvider, checkAuthProvider) {
         
     $routeProvider
+        .when('/404', {
+            templateUrl: 'templates/404.html'
+        })
         .when('/login', {
             templateUrl: 'templates/login.html',
-            controller: 'LoginController'
+            controller: 'LoginController',
+            controllerAs: 'LoginCtrl'
         })
-        .when('/register', {
-            templateUrl: 'templates/register.html',
-            controller: 'RegisterController'
+        .when('/registration', {
+            templateUrl: 'templates/registration.html',
+            controller: 'RegistrationController',
+            controllerAs: 'RegistrationCtrl'
         })
-        .when('/404', {
-            templateUrl: 'templates/404.html',
-            controller: 'NotFoundController'
-        })
-        .when('/create', {
+        .when('/manage/:id?', {
             templateUrl: 'templates/manage.html',
-            controller: 'ManageController'
-        })
-        .when('/update', {
-            templateUrl: 'templates/manage.html',
-            controller: 'ManageController'
+            controller: 'ManageController',
+            controllerAs: 'ManageCtrl',
+            resolve: {
+                isLogged: checkAuthProvider.$get().isLogged
+            }
         })
         .when('/profile', {
             templateUrl: 'templates/profile.html',
-            controller: 'ProfileController'
+            controller: 'ProfileController as ProfileCtrl',
+            resolve: {
+                isLogged: checkAuthProvider.$get().isLogged
+            }
         })
         .when('/', {
             templateUrl: 'templates/index.html',
-            controller: 'IndexController'
+            controller: 'IndexController',
+            controllerAs: 'IndexCtrl',
+            resolve: {
+                isLogged: checkAuthProvider.$get().isLogged
+            }
         })
         .otherwise({
             redirectTo:'/404'
         });
 };
 
-app.config(['$routeProvider', router]);
+app.config(['$routeProvider', 'checkAuthProvider', router]);
