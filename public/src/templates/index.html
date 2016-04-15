@@ -1,0 +1,26 @@
+<header></header>
+
+
+<div class="container">
+    
+    <div class="row">
+        
+        <div class="col-xs-12"  >
+
+            <div class="list-group">
+                
+                <a class="list-group-item" ng-repeat="product in IndexCtrl.products">
+                    <span><input type="checkbox"/></span>
+                    <h4 class="list-group-item-heading">{{product.name}}</h4>
+                    <p class="list-group-item-text">{{product.price | currency}}</p>
+                </a>
+
+                <a href="#/manage" class="btn btn-success">Create Product</a>
+                
+            </div>
+            
+        </div>
+        
+    </div>
+    
+</div>
