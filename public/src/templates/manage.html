@@ -7,25 +7,62 @@
         
         <div class="col-xs-12 col-sm-10 col-lg-8 col-sm-offset-1 col-xs-offset-0 col-lg-offset-2">
 
-            <form class="form-horizontal form-manage-product" novalidate>
+            <form class="form-horizontal form-manage-product" novalidate name="ProductForm" ng-submit="ManageCtrl.processProduct($event, ManageCtrl.product,ProductForm)" >
                 <fieldset>
                     <legend>{{ManageCtrl.mode}} product</legend>
-                    <div class="form-group">
+                    <div class="form-group" ng-class="{'has-error' : ProductForm.$submitted && ProductForm.name.$invalid}" >
                         <label for="inputName" class="col-lg-2 control-label">Name</label>
                         <div class="col-lg-10">
-                            <input type="text" class="form-control" id="inputName" placeholder="Name">
+                            <input 
+                                    type="text" 
+                                    required 
+                                    ng-model="ManageCtrl.product.name"
+                                    name="name"
+                                    ng-maxlength="255"
+                                    class="form-control" 
+                                    id="inputName" 
+                                    placeholder="Name" >
+                            <p class="error-messages" ng-show="ProductForm.$submitted && ProductForm.name.$error.required">Name is required</p>
+                            <p class="error-messages" ng-show="ProductForm.$submitted && ProductForm.name.$error.maxlength">Name is too long</p>
+                            <p class="error-messages" ng-show="ProductForm.$submitted && ProductForm.name.$error.server">{{ ProductForm.name.$error.server }}</p>
                         </div>
                     </div>
-                    <div class="form-group">
+                    <div class="form-group" ng-class="{'has-error' : ProductForm.$submitted && ProductForm.price.$invalid}">
                         <label for="inputPrice" class="col-lg-2 control-label">Price</label>
                         <div class="col-lg-10">
-                            <input type="text" class="form-control" id="inputPrice" placeholder="Price">
+                            <div class="input-group">
+                                <span class="input-group-addon">$</span>
+                                <input
+                                        type="text"
+                                        required
+                                        ng-model="ManageCtrl.product.price"
+                                        name="price"
+                                        pattern="^\d{1,4}(,\d{1,2})?$"
+                                        class="form-control"
+                                        id="inputPrice"
+                                        placeholder="Price" >
+                            </div>
+                            <p class="error-messages" ng-show="ProductForm.$submitted && ProductForm.price.$error.required">Price is required</p>
+                            <p class="error-messages" ng-show="ProductForm.$submitted && ProductForm.price.$error.pattern">Wrong price format</p>
+                            <p class="error-messages" ng-show="ProductForm.$submitted && ProductForm.price.$error.server">{{ ProductForm.price.$error.server }}</p>
                         </div>
                     </div>
-                    <div class="form-group">
+                    <div class="form-group" ng-class="{'has-error' : ProductForm.$submitted && ProductForm.description.$invalid}">
                         <label for="inputDescription" class="col-lg-2 control-label">Description</label>
                         <div class="col-lg-10">
-                            <textarea class="form-control" rows="3" id="inputDescription" placeholder="Description"></textarea>
+                            <textarea 
+                                    class="form-control" 
+                                    required 
+                                    ng-model="ManageCtrl.product.description"
+                                    name="description"
+                                    ng-maxlength="1000"
+                                    rows="5" 
+                                    id="inputDescription" 
+                                    placeholder="Description" >
+                            </textarea>
+                            <p class="error-messages" ng-show="ProductForm.$submitted && ProductForm.description.$error.required">Description is required</p>
+                            <p class="error-messages" ng-show="ProductForm.$submitted && ProductForm.description.$error.pattern">Description is too long</p>
+                            <p class="error-messages" ng-show="ProductForm.$submitted && ProductForm.description.$error.server">{{ ProductForm.description.$error.server }}</p>
                         </div>
                     </div>
                     
@@ -43,3 +80,6 @@
     </div>
     
 </div>
+
+
+<spinner></spinner>
