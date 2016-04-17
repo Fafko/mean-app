@@ -34,7 +34,10 @@ var router = function($routeProvider, checkAuthProvider) {
             controller: 'IndexController',
             controllerAs: 'IndexCtrl',
             resolve: {
-                isLogged: checkAuthProvider.$get().isLogged
+                isLogged: checkAuthProvider.$get().isLogged,
+                products: ['Product', function(Product){
+                    return Product.query().$promise;
+                }]
             }
         })
         .otherwise({
