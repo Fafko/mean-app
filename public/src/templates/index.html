@@ -5,17 +5,57 @@
     
     <div class="row">
         
-        <div class="col-xs-12"  >
+        <div class="col-xs-12">
 
+            <h1>Products list</h1>
+            
             <div class="list-group">
                 
-                <a class="list-group-item" ng-repeat="product in IndexCtrl.products">
-                    <span><input type="checkbox"/></span>
-                    <h4 class="list-group-item-heading">{{product.name}}</h4>
-                    <p class="list-group-item-text">{{product.price | currency}}</p>
-                </a>
+                <div class="list-header clearfix" >
+                    <div class="col-xs-2 col-sm-1"><input type="checkbox"/>#</div>
+                    <div class="col-xs-6 col-sm-7">Name</div>
+                    <div class="col-xs-2">Price</div>
+                    <div class="col-xs-2">Actions</div>
+                </div>
+                <div ng-repeat="product in IndexCtrl.products" class="clearfix product">
+                    <div class="col-xs-2 col-sm-1"><input type="checkbox"/>#{{$index + 1 }}</div>
+                    <div class="col-xs-6 col-sm-7">
+                        <h4 class="list-group-item-heading">{{product.name}}</h4>
+                        <p ng-show="product.showDesctiption" class="list-group-item-text">{{product.description}}</p>
+                    </div>
+                    <div class="col-xs-2">{{product.price | currency}}</div>
+                    <div class="col-xs-2">
+                        <a href="#/manage/{{ product.id }}" class="btn btn-warning btn-xs">Edit <span class="hidden-xs" >Product</span> </a>
+                        <button ng-click="IndexCtrl.toggleDetails(product)" class="btn btn-info btn-xs">Details</button>
+                    </div>
+                </div>
+                
+                <div class="tool-bar">
+                    <ul class="pagination">
+                        <li class="disabled"><a href="#">&laquo;</a></li>
+                        <li class="active"><a href="#">1</a></li>
+                        <li><a href="#">2</a></li>
+                        <li><a href="#">3</a></li>
+                        <li><a href="#">4</a></li>
+                        <li><a href="#">5</a></li>
+                        <li><a href="#">&raquo;</a></li>
+                    </ul>
+                    
+                    <a href="#/manage" class="btn btn-success">Create Product</a>
+                </div>
 
-                <a href="#/manage" class="btn btn-success">Create Product</a>
+                <form>
+                    <div class="form-group quantity-handler">
+                        <label>Show
+                            <select class="form-control" id="select">
+                                <option value="10" >10</option>
+                                <option value="20" >20</option>
+                                <option value="50" >50</option>
+                            </select>
+                            products on page
+                        </label>
+                    </div>
+                </form>
                 
             </div>
             
@@ -24,3 +64,5 @@
     </div>
     
 </div>
+
+<spinner></spinner>
